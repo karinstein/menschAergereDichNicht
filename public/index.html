@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Websocket</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- <script src="dom.js"></script> -->
+    <script src="socket.io/socket.io.js"></script>
+    <script src="index.js" type="module" defer></script>
+</head>
+
+<body>
+    <div id="main">
+        <div style="height: 40px;">
+            <button id='neuesSpiel'>Neues Spiel</button>
+            <button id='seiteNeuLaden'>Spielfeld neu laden</button>
+            <button id='diceBtn' disabled=true></button>
+        </div>
+        <br>
+        <div style="height: 40px;">
+            <div>
+                <div id="myColor"></div> <span id="myColorText"> ist meine Farbe</span>
+            </div>
+            <div>
+                <div id="whichTurn"></div> <span id="whichTurnText"> ist dran</span>
+            </div>
+            <div>
+                <div id="diceValue"></div>
+                <!-- <button id='diceBtn'></button> -->
+            </div>
+        </div>
+    <div style="float: left">
+        <canvas id="spielFeld"></canvas>
+    </div>
+</body>
+
+</html>
