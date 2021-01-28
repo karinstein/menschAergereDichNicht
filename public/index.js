@@ -161,10 +161,8 @@ document.addEventListener("DOMContentLoaded", evt => {
                 zeichneKreis(i,j,radius,'gray');
                 // firstClickData = {color: meineFarbe, i: i, j: j};
                 firstClickData = {colorIndex: ersteSteinFarbIndex, i: i, j: j};
-//                dice.disabled = true;
             }
         }
-
     }
 
     const naechsterZug = event => {

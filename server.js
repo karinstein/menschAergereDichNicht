@@ -26,7 +26,6 @@ const io = socketIo(httpServer);
 const socketpool = {};
 let aktuellerSpielStatus;
 let diceCounter = 0;
-
 // const farben = ['green','black','red','yellow'];
 
 // Klassen
@@ -45,6 +44,7 @@ const darfZiehen = (wuerfel) => {
 }
 
 const updateSpiel = (zugInfo) => {
+    diceCounter = 0;
     if (!zugInfo) {
         aktuellerSpielStatus.inkrementZug();
         return;
@@ -54,7 +54,6 @@ const updateSpiel = (zugInfo) => {
 //    aktuellerSpielStatus.setSpielData(i0,j0,'');
     aktuellerSpielStatus.setSpielData(i1,j1,1);
     aktuellerSpielStatus.setSpielData(i2,j2,f1);
-
 //    if (f2 && f2.length>0) {
     if (f2>1) {
         let emptySlot = aktuellerSpielStatus.startPunkte[f2].find(elem => {
@@ -101,9 +100,7 @@ io.on('connect', socket => {
 
     socket.on('wuerfelUpdateServer', wuerfel => {
         let finishTurn = darfZiehen(wuerfel.wert);
-        // console.log('wuerfel: ', wuerfel);
         // console.log('diceCounter: ',diceCounter);
-        // console.log('darfZiehen: ',finishTurn);
         io.emit('wuerfelUpdateSpieler', {
             nextTurn: finishTurn,
             value:    wuerfel.wert
@@ -111,7 +108,6 @@ io.on('connect', socket => {
         if (!finishTurn) {
             diceCounter++;
             if (diceCounter>2){
-                diceCounter = 0;
                 updateSpiel(false);
                 setTimeout(() => { io.emit('neuerZugUpdateSpieler',aktuellerSpielStatus)}, 500);
             }
